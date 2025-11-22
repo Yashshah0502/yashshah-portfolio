@@ -14,9 +14,10 @@ const data = [
 
 export default function TechRadar() {
   return (
-    <div className="w-full h-[300px] md:h-[400px] bg-black/40 border border-white/5 rounded-xl p-4 flex flex-col items-center justify-center">
+    <div className="w-full h-[300px] md:h-[400px] min-h-[300px] bg-black/40 border border-white/5 rounded-xl p-4 flex flex-col items-center justify-center">
       <h3 className="text-xl font-bold text-white mb-4">Skill Radar</h3>
-      <ResponsiveContainer width="100%" height="100%">
+      <div className="w-full flex-1 min-h-0">
+        <ResponsiveContainer width="100%" height="100%">
         <RadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
           <PolarGrid stroke="#333" />
           <PolarAngleAxis dataKey="subject" tick={{ fill: "#9CA3AF", fontSize: 12 }} />
@@ -35,6 +36,7 @@ export default function TechRadar() {
           />
         </RadarChart>
       </ResponsiveContainer>
+      </div>
     </div>
   );
 }
