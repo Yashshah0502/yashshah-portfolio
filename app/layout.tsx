@@ -71,7 +71,7 @@ export default function RootLayout({
           })();
         ` }} />
       </head>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-black text-white antialiased`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-black text-white antialiased`} suppressHydrationWarning>
         <ViewModeProvider>
           <Navbar />
           {children}

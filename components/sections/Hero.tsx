@@ -24,15 +24,15 @@ export default function Hero() {
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
             Hi, I&apos;m <span className="text-blue-500">Yash.</span>
           </h1>
-          <h2 className="text-2xl md:text-3xl text-gray-300 mb-8 h-[60px]">
-            I am a{" "}
+          <h2 className="text-2xl md:text-3xl text-gray-300 mb-8 h-[80px] md:h-[60px]">
+            I am{" "}
             <span className="text-blue-400 font-mono">
               <Typewriter
                 words={[
-                  "Data Engineer",
-                  "AI Engineer",
-                  "Full-Stack Developer",
-                  "Software Engineer",
+                  "a Full-Stack Developer",
+                  "a Software Engineer",
+                  "a Data Engineer",
+                  "an AI Engineer",
                 ]}
                 loop={0}
                 cursor
