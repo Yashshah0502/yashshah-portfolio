@@ -1,23 +1,27 @@
 export interface SkillCategory {
-  title: string;
-  skills: string[];
+  category: string;
+  items: string[];
 }
 
 export const skills: SkillCategory[] = [
   {
-    title: "AI & LLMs",
-    skills: ["OpenAI API", "LangChain", "LlamaIndex", "Hugging Face", "RAG", "Prompt Engineering", "Fine-tuning"]
+    category: "AI & ML",
+    items: ["OpenAI API", "LangChain", "LlamaIndex", "Hugging Face", "RAG", "Prompt Engineering", "Fine-tuning"]
   },
   {
-    title: "Backend & Data",
-    skills: ["Python", "FastAPI", "PostgreSQL", "Redis", "Pinecone", "Microsoft Fabric", "SQL"]
+    category: "Backend & Cloud",
+    items: ["Python", "FastAPI", "PostgreSQL", "Redis", "Pinecone", "Microsoft Fabric", "AWS", "Azure"]
   },
   {
-    title: "Frontend",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Shadcn/UI"]
+    category: "Frontend",
+    items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Shadcn/UI"]
   },
   {
-    title: "DevOps & Cloud",
-    skills: ["Docker", "Kubernetes", "AWS", "Azure", "Vercel", "CI/CD", "Git"]
+    category: "Data Engineering",
+    items: ["SQL", "PySpark", "ETL Pipelines", "Airflow", "Databricks", "Snowflake"]
+  },
+  {
+    category: "Tools",
+    items: ["Docker", "Kubernetes", "Git", "CI/CD", "Vercel", "Linux"]
   }
 ];

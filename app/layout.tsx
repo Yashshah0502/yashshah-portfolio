@@ -15,8 +15,40 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Yash Shah | AI Engineer & Full-Stack Developer",
-  description: "Portfolio of Yash Shah, an AI Engineer building agents and full-stack systems.",
+  title: {
+    default: "Yash Shah | AI Engineer & Full-Stack Developer",
+    template: "%s | Yash Shah"
+  },
+  description: "Portfolio of Yash Shah, an AI Engineer and Full-Stack Developer specializing in building scalable AI agents, RAG systems, and modern web applications.",
+  keywords: ["AI Engineer", "Full Stack Developer", "Machine Learning", "Next.js", "React", "Python", "LangChain", "RAG"],
+  authors: [{ name: "Yash Shah" }],
+  creator: "Yash Shah",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://yashshah.dev",
+    title: "Yash Shah | AI Engineer & Full-Stack Developer",
+    description: "Building intelligent systems that ship. Explore my portfolio of AI agents and full-stack projects.",
+    siteName: "Yash Shah Portfolio",
+    images: [
+      {
+        url: "/og-image.png", // Ensure this image exists or is a placeholder
+        width: 1200,
+        height: 630,
+        alt: "Yash Shah Portfolio"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yash Shah | AI Engineer & Full-Stack Developer",
+    description: "Building intelligent systems that ship. Explore my portfolio of AI agents and full-stack projects.",
+    images: ["/og-image.png"],
+    creator: "@yashshah"
+  },
+  icons: {
+    icon: "/favicon.ico",
+  }
 };
 
 export default function RootLayout({

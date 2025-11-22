@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import { experience } from "@/data/experience";
 import { Briefcase, Calendar } from "lucide-react";
+import { useViewMode } from "@/context/ViewModeContext";
 
 export default function Experience() {
+  const { viewMode } = useViewMode();
   return (
     <section id="experience" className="py-20 bg-black text-white">
       <div className="container mx-auto px-6">
@@ -48,7 +50,7 @@ export default function Experience() {
               </div>
 
               <ul className="space-y-2 mb-4">
-                {item.description.map((desc, i) => (
+                {(viewMode === "recruiter" ? item.recruiterDescription : item.engineerDescription).map((desc, i) => (
                   <li key={i} className="text-gray-400 text-sm leading-relaxed list-disc list-inside marker:text-blue-500">
                     {desc}
                   </li>

@@ -15,6 +15,8 @@ interface ProjectModalProps {
 export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
   const [viewMode, setViewMode] = useState<"recruiter" | "engineer">("recruiter");
   const [activeTab, setActiveTab] = useState<"overview" | "architecture" | "highlights">("overview");
+  
+  const description = viewMode === "recruiter" ? project.recruiterDescription : project.engineerDescription;
 
   if (!isOpen) return null;
 
@@ -75,9 +77,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-white text-black text-sm font-bold rounded-full hover:bg-gray-200 transition-colors"
+                    className="p-3 bg-white text-black rounded-full hover:bg-gray-200 transition-colors"
+                    title="View Source Code"
                   >
-                    <Github size={18} /> View Code
+                    <Github size={20} />
                   </a>
                 )}
                 {project.liveUrl && (
@@ -85,114 +88,85 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-zinc-800 text-white text-sm font-medium rounded-full border border-white/10 hover:bg-zinc-700 transition-colors"
+                    className="p-3 bg-zinc-800 text-white rounded-full border border-white/10 hover:bg-zinc-700 transition-colors"
+                    title="Live Demo"
                   >
-                    <ExternalLink size={18} /> Live Demo
+                    <ExternalLink size={20} />
                   </a>
                 )}
               </div>
-            </div>
-          </div>
-
-          {/* Controls */}
-          <div className="px-8 py-4 border-b border-white/10 bg-zinc-900/50 flex items-center justify-between gap-4 flex-wrap sticky top-0 z-10 backdrop-blur-sm">
-            <div className="flex gap-8">
-              {[
-                { id: "overview", label: "Overview" },
-                { id: "architecture", label: "Architecture" },
-                { id: "highlights", label: "Highlights" },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id as any)}
-                  className={cn(
-                    "text-sm font-medium transition-colors relative py-2",
-                    activeTab === tab.id ? "text-white" : "text-gray-500 hover:text-gray-300"
-                  )}
-                >
-                  {tab.label}
-                  {activeTab === tab.id && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500"
-                    />
-                  )}
-                </button>
-              ))}
+              
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{project.title}</h2>
+              <p className="text-gray-400 text-lg">{project.shortDescription}</p>
             </div>
 
-            <div className="flex bg-zinc-900 rounded-lg p-1 border border-white/10">
+            {/* Tabs */}
+            <div className="flex border-b border-white/10 px-8 relative z-20 bg-zinc-900">
               <button
-                onClick={() => setViewMode("recruiter")}
+                onClick={() => setActiveTab("overview")}
                 className={cn(
-                  "px-3 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-2",
-                  viewMode === "recruiter" ? "bg-zinc-800 text-white shadow-sm" : "text-gray-500 hover:text-gray-300"
+                  "px-4 py-4 text-sm font-medium border-b-2 transition-colors focus:outline-none",
+                  activeTab === "overview" ? "border-blue-500 text-white" : "border-transparent text-gray-500 hover:text-gray-300"
                 )}
               >
-                <User size={14} /> Recruiter
+                Overview
               </button>
               <button
-                onClick={() => setViewMode("engineer")}
+                onClick={() => setActiveTab("architecture")}
                 className={cn(
-                  "px-3 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-2",
-                  viewMode === "engineer" ? "bg-zinc-800 text-white shadow-sm" : "text-gray-500 hover:text-gray-300"
+                  "px-4 py-4 text-sm font-medium border-b-2 transition-colors focus:outline-none",
+                  activeTab === "architecture" ? "border-blue-500 text-white" : "border-transparent text-gray-500 hover:text-gray-300"
                 )}
               >
-                <Server size={14} /> Engineer
+                Architecture
+              </button>
+              <button
+                onClick={() => setActiveTab("highlights")}
+                className={cn(
+                  "px-4 py-4 text-sm font-medium border-b-2 transition-colors focus:outline-none",
+                  activeTab === "highlights" ? "border-blue-500 text-white" : "border-transparent text-gray-500 hover:text-gray-300"
+                )}
+              >
+                Highlights
               </button>
             </div>
-          </div>
 
-          {/* Scrollable Content */}
-          <div className="p-8 overflow-y-auto flex-1 bg-zinc-950">
-            <div className="max-w-3xl mx-auto">
+            {/* Content */}
+            <div className="p-8 overflow-y-auto custom-scrollbar flex-1">
               {activeTab === "overview" && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
                   <div>
-                    <h3 className="text-lg font-bold text-white mb-4">Project Summary</h3>
+                    <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                      <User size={18} className="text-blue-400" /> The Challenge & Solution
+                    </h3>
                     <p className="text-gray-300 leading-relaxed text-lg">
-                      {viewMode === "recruiter" ? project.shortDescription : project.fullDescription}
+                      {description}
                     </p>
                   </div>
                   
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="p-6 bg-blue-900/10 border border-blue-500/20 rounded-xl">
-                      <h4 className="text-blue-400 font-semibold mb-3 flex items-center gap-2">
-                        <Layers size={20} /> Impact
-                      </h4>
-                      <p className="text-gray-300">{project.impact}</p>
-                    </div>
-                    <div className="p-6 bg-purple-900/10 border border-purple-500/20 rounded-xl">
-                      <h4 className="text-purple-400 font-semibold mb-3 flex items-center gap-2">
-                        <Cpu size={20} /> Core Tech
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {project.techStack.slice(0, 4).map(t => (
-                          <span key={t} className="text-sm text-gray-400">• {t}</span>
-                        ))}
-                      </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                      <CheckCircle size={18} className="text-green-400" /> Key Impact
+                    </h3>
+                    <div className="p-4 bg-green-900/10 border border-green-500/20 rounded-xl text-green-300">
+                      {project.impact}
                     </div>
                   </div>
                 </motion.div>
               )}
 
               {activeTab === "architecture" && (
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
-                  <h3 className="text-lg font-bold text-white mb-4">System Architecture</h3>
-                  <div className="space-y-0 relative">
-                    {/* Connecting Line */}
-                    <div className="absolute left-6 top-4 bottom-4 w-0.5 bg-gradient-to-b from-blue-500/50 to-transparent" />
-                    
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+                   <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                      <Server size={18} className="text-purple-400" /> System Architecture
+                    </h3>
+                  <div className="space-y-3">
                     {project.architecture.map((step, i) => (
-                      <div key={i} className="relative flex gap-6 pb-8 last:pb-0 group">
-                        <div className="relative z-10 w-12 h-12 rounded-full bg-zinc-900 border border-blue-500/30 flex items-center justify-center shrink-0 group-hover:border-blue-500 transition-colors shadow-[0_0_15px_rgba(59,130,246,0.1)]">
-                          <span className="text-blue-400 font-mono font-bold">{i + 1}</span>
-                        </div>
-                        <div className="pt-2">
-                          <div className="p-4 bg-zinc-900/50 border border-white/5 rounded-xl group-hover:bg-zinc-900 transition-colors">
-                            <p className="text-gray-300 font-mono text-sm">{step}</p>
-                          </div>
-                        </div>
+                      <div key={i} className="flex items-center gap-4 p-3 bg-zinc-800/50 rounded-lg border border-white/5">
+                        <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-600 text-white font-bold rounded-full text-sm">
+                          {i + 1}
+                        </span>
+                        <span className="text-gray-300 font-mono text-sm">{step}</span>
                       </div>
                     ))}
                   </div>

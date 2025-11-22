@@ -4,16 +4,18 @@ import { useEffect } from "react";
 
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 import IntroOverlay from "@/components/ui/IntroOverlay";
 import Hero from "@/components/sections/Hero";
-import About from "@/components/sections/About";
-import Skills from "@/components/sections/Skills";
-import Projects from "@/components/sections/Projects";
-import Experience from "@/components/sections/Experience";
-import Playground from "@/components/sections/Playground";
-import BuildWithMe from "@/components/sections/BuildWithMe";
-import Contact from "@/components/sections/Contact";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+
+const About = dynamic(() => import("@/components/sections/About"), { ssr: true });
+const Skills = dynamic(() => import("@/components/sections/Skills"), { ssr: true });
+const Projects = dynamic(() => import("@/components/sections/Projects"), { ssr: true });
+const Experience = dynamic(() => import("@/components/sections/Experience"), { ssr: true });
+const Playground = dynamic(() => import("@/components/sections/Playground"), { ssr: false }); // Client-side only for heavy interactive
+const BuildWithMe = dynamic(() => import("@/components/sections/BuildWithMe"), { ssr: true });
+const Contact = dynamic(() => import("@/components/sections/Contact"), { ssr: true });
 
 export default function Home() {
   useEffect(() => {

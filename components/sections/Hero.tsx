@@ -37,12 +37,17 @@ export default function Hero() {
                 loop={0}
                 cursor
                 cursorStyle="_"
-                typeSpeed={70}
-                deleteSpeed={50}
-                delaySpeed={1000}
+                typeSpeed={80}
+                deleteSpeed={60}
+                delaySpeed={2000}
               />
             </span>
           </h2>
+          <style jsx global>{`
+            .text-glow {
+              text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            }
+          `}</style>
           <p className="text-gray-400 text-lg mb-8 max-w-lg">
             I build AI agents and full-stack systems that actually ship. 
             Turning complex data into intelligent, usable products.

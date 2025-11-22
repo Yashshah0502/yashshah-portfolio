@@ -3,7 +3,8 @@ export interface ExperienceItem {
   role: string;
   company: string;
   period: string;
-  description: string[];
+  recruiterDescription: string[];
+  engineerDescription: string[];
   techStack: string[];
 }
 
@@ -13,11 +14,15 @@ export const experience: ExperienceItem[] = [
     role: "IT Business Analyst Intern",
     company: "Zydus Pharmaceuticals USA Inc.",
     period: "June 2025 - Present",
-    description: [
-      "I'm currently building a multi-agent AI system within Microsoft Teams to help the sales team query complex data without needing SQL knowledge. It uses a modular architecture with specialized agents for routing and validation.",
-      "One of my biggest wins was optimizing our address matching pipeline. I used PySpark and fuzzy logic to link over 600K records with 93% accuracy, which was a huge step up from the manual process.",
-      "I also tackled a massive data reconciliation project, fixing over 1 million SAP transactions using automated logic to ensure our compliance reporting was 100% accurate.",
-      "To speed up drug analysis, I wrote a Python pipeline that extracts tables from hundreds of PDFs, making data available in Microsoft Fabric for immediate analysis."
+    recruiterDescription: [
+      "I'm currently building a smart AI assistant for the sales team to help them find data instantly without needing technical skills.",
+      "I optimized our data processes, matching over 600,000 records with 93% accuracy, which saved the team weeks of manual work.",
+      "I also automated our compliance reporting, ensuring 100% accuracy for over 1 million transactions."
+    ],
+    engineerDescription: [
+      "Architecting a multi-agent RAG system within Microsoft Teams using Azure OpenAI and Semantic Kernel to enable natural language SQL querying.",
+      "Built a PySpark data pipeline with fuzzy matching logic (Levenshtein distance) to reconcile 600K+ records with 93% precision.",
+      "Developed Python scripts to extract structured data from PDF tables and load it into Microsoft Fabric for real-time analytics."
     ],
     techStack: ["Microsoft Fabric", "Azure OpenAI", "Python", "PySpark", "SQL", "Microsoft Teams"]
   },
@@ -26,10 +31,15 @@ export const experience: ExperienceItem[] = [
     role: "Data Engineer",
     company: "Arizona State University",
     period: "Jan 2024 - May 2025",
-    description: [
-      "I worked on modernizing student record processing. By cleaning and standardizing Excel data for Salesforce, I helped cut down report generation time by over 50%.",
-      "I loved contributing to the Smart DART app. I implemented over 10 new features using React and AWS Lambda, which not only added functionality but also improved the app's speed by 2.6%.",
-      "I noticed our inventory tracking was messy, so I built a custom Flask-Airtable system to track 500+ SKUs. It solved our sync issues and saved the team hours of manual work every week."
+    recruiterDescription: [
+      "I modernized how we handle student records, cutting report generation time by 50% by cleaning up our data.",
+      "I added new features to the Smart DART app that improved its speed by 2.6% and made it easier for students to use.",
+      "I built a custom inventory system that tracked over 500 items, solving a major headache for the operations team."
+    ],
+    engineerDescription: [
+      "Optimized ETL pipelines for Salesforce data integration, reducing report generation latency by 50% through efficient SQL indexing.",
+      "Implemented 10+ features for the Smart DART application using React and AWS Lambda, optimizing API response times by 2.6%.",
+      "Developed a custom inventory management system using Flask and Airtable API to synchronize status for 500+ SKUs."
     ],
     techStack: ["React", "TypeScript", "AWS Lambda", "DynamoDB", "Flask", "GraphQL", "Salesforce"]
   },
@@ -38,10 +48,15 @@ export const experience: ExperienceItem[] = [
     role: "Software Engineer Intern",
     company: "New York City Department of Finance",
     period: "June 2024 - Aug 2024",
-    description: [
-      "I focused on improving internal tools. I built modular SharePoint components using React and SPFx that made document retrieval 35% faster for the staff.",
-      "I created a responsive intake form that handled validation automatically. It routed data directly via Power Automate, eliminating a lot of back-and-forth email chains.",
-      "Data migration was a big part of my role. I wrote Python scripts to clean and map 50,000+ records, ensuring we didn't lose a single piece of data during the transfer to SharePoint."
+    recruiterDescription: [
+      "I built tools to help staff find documents 35% faster, making their daily work much more efficient.",
+      "I created a digital intake form that automatically routed data to the right people, eliminating endless email chains.",
+      "I successfully moved 50,000+ records to a new system without losing a single piece of data."
+    ],
+    engineerDescription: [
+      "Developed modular SharePoint Framework (SPFx) web parts using React and Fluent UI, improving document retrieval efficiency by 35%.",
+      "Automated data routing workflows using Power Automate and Python, replacing manual email-based processes.",
+      "Wrote Python migration scripts to clean, map, and transfer 50,000+ legacy records to SharePoint with 100% data integrity."
     ],
     techStack: ["React", "SPFx", "Fluent UI", "Python", "Power Automate", "SharePoint"]
   },
@@ -50,10 +65,15 @@ export const experience: ExperienceItem[] = [
     role: "AI Engineer",
     company: "AI Genesis Glib",
     period: "Dec 2022 - April 2023",
-    description: [
-      "I built a conversational agent from scratch using Rasa. It handled flight bookings and significantly reduced the load on our support team by automating common requests.",
-      "I later migrated our NLP stack to LangChain and Pinecone. This was a game-changer, improving our intent recognition to 95% and making the bot feel much more intelligent.",
-      "Quality was key, so I set up a rigorous testing pipeline with pytest. We tested over 100 scenarios to ensure the bot routed users correctly every time."
+    recruiterDescription: [
+      "I built a customer support bot that handled flight bookings, which took a huge load off the human support team.",
+      "I upgraded our AI brain to be much smarter, improving its ability to understand users to 95%.",
+      "I set up a testing system to make sure the bot always gave the right answers before we released any updates."
+    ],
+    engineerDescription: [
+      "Built a conversational AI agent using Rasa for flight booking intent recognition and slot filling.",
+      "Migrated NLP stack to LangChain and Pinecone, improving intent classification accuracy to 95% via few-shot prompting.",
+      "Established a CI/CD testing pipeline with Pytest, running 100+ regression scenarios for every model deployment."
     ],
     techStack: ["Rasa", "LangChain", "Pinecone", "FastAPI", "Python", "Pytest"]
   }

@@ -1,73 +1,101 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-scroll";
-import { Menu, X, Terminal } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import ViewToggle from "@/components/ui/ViewToggle";
-
-const navItems = [
-  { name: "About", to: "about" },
-  { name: "Skills", to: "skills" },
-  { name: "Projects", to: "projects" },
-  { name: "Experience", to: "experience" },
-  { name: "Playground", to: "playground" },
-];
+import ViewToggle from "./ui/ViewToggle";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      
+      // Active section detection
+      const sections = ["hero", "about", "skills", "projects", "experience", "playground", "contact"];
+      const current = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top >= -100 && rect.top < window.innerHeight / 2;
+        }
+        return false;
+      });
+      if (current) setActiveSection(current);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navLinks = [
+    { name: "About", to: "about" },
+    { name: "Skills", to: "skills" },
+    { name: "Projects", to: "projects" },
+    { name: "Experience", to: "experience" },
+    { name: "Playground", to: "playground" },
+    { name: "Contact", to: "contact" },
+  ];
+
   return (
-    <nav
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
       className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent",
-        scrolled
-          ? "bg-black/80 backdrop-blur-md border-white/10 py-4"
-          : "bg-transparent py-6"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
+        scrolled 
+          ? "bg-black/60 backdrop-blur-md border-white/10 py-3" 
+          : "bg-transparent border-transparent py-5"
       )}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <Link
-          to="hero"
-          smooth={true}
-          duration={500}
-          className="cursor-pointer flex items-center gap-2 font-mono text-xl font-bold text-white hover:text-blue-400 transition-colors"
+        <Link 
+          to="hero" 
+          smooth={true} 
+          duration={500} 
+          className="text-xl font-bold font-mono cursor-pointer flex items-center gap-2"
         >
-          <Terminal size={24} className="text-blue-500" />
-          <span>YASH SHAH</span>
+          <span className="text-blue-500">&lt;</span>
+          Yash
+          <span className="text-blue-500">/&gt;</span>
         </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-6">
-          <ViewToggle />
-          
-          {navItems.map((item) => (
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
             <Link
-              key={item.name}
-              to={item.to}
+              key={link.name}
+              to={link.to}
               smooth={true}
               duration={500}
+              spy={true}
               offset={-70}
-              className="cursor-pointer text-sm font-medium text-gray-400 hover:text-white transition-colors"
+              className={cn(
+                "text-sm font-medium cursor-pointer transition-colors relative group",
+                activeSection === link.to ? "text-white" : "text-gray-400 hover:text-white"
+              )}
             >
-              {item.name}
+              {link.name}
+              {activeSection === link.to && (
+                <motion.div
+                  layoutId="activeNav"
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-500"
+                />
+              )}
             </Link>
           ))}
-          <a
-            href="#contact"
-            className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-full transition-all hover:shadow-[0_0_15px_rgba(37,99,235,0.5)]"
-          >
-            Contact Me
-          </a>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-zinc-900 border border-white/10 rounded-md text-xs text-gray-400 font-mono">
+            <span className="text-xs">⌘</span>K
+          </div>
+          <ViewToggle />
         </div>
 
         {/* Mobile Menu Button */}
@@ -75,35 +103,34 @@ export default function Navbar() {
           className="md:hidden text-white"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-black/95 border-b border-white/10 py-6 px-6 flex flex-col gap-6">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.to}
-              smooth={true}
-              duration={500}
-              offset={-70}
-              onClick={() => setIsOpen(false)}
-              className="text-lg font-medium text-gray-300 hover:text-white"
-            >
-              {item.name}
-            </Link>
-          ))}
-          <a
-            href="#contact"
-            onClick={() => setIsOpen(false)}
-            className="text-center py-3 bg-blue-600 text-white rounded-lg font-medium"
-          >
-            Contact Me
-          </a>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="md:hidden bg-zinc-900 border-b border-white/10 py-4"
+        >
+          <div className="container mx-auto px-6 flex flex-col gap-4">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.to}
+                smooth={true}
+                duration={500}
+                offset={-70}
+                onClick={() => setIsOpen(false)}
+                className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+        </motion.div>
       )}
-    </nav>
+    </motion.nav>
   );
 }

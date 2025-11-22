@@ -49,21 +49,30 @@ export default function BuildWithMe() {
               </a>
             </div>
 
-            <div className="relative h-[300px] bg-black/50 rounded-xl border border-white/10 p-6 flex flex-col justify-between">
-              <div className="flex items-center gap-2 border-b border-white/10 pb-4">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                <div className="w-3 h-3 rounded-full bg-green-500" />
-                <span className="ml-2 text-xs text-gray-500 font-mono">shipping_log.txt</span>
+            <div className="relative h-[300px] bg-black/50 rounded-xl border border-white/10 p-6 flex flex-col justify-between overflow-hidden group">
+              {/* Soft Animated Gradient Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-transparent opacity-50 animate-pulse" />
+              
+              {/* Motion Blur Sweep */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]" />
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 border-b border-white/10 pb-4">
+                  <div className="w-3 h-3 rounded-full bg-red-500" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                  <div className="w-3 h-3 rounded-full bg-green-500" />
+                  <span className="ml-2 text-xs text-gray-500 font-mono">shipping_log.txt</span>
+                </div>
+                <div className="font-mono text-sm space-y-2 text-gray-400 mt-4">
+                  <p><span className="text-green-400">➜</span> Initializing project...</p>
+                  <p><span className="text-green-400">➜</span> Integrating OpenAI API...</p>
+                  <p><span className="text-green-400">➜</span> Setting up vector database...</p>
+                  <p><span className="text-green-400">➜</span> Deploying to Vercel...</p>
+                  <p className="text-white"><span className="text-green-400">✔</span> Project shipped in 7 days.</p>
+                </div>
               </div>
-              <div className="font-mono text-sm space-y-2 text-gray-400">
-                <p><span className="text-green-400">➜</span> Initializing project...</p>
-                <p><span className="text-green-400">➜</span> Integrating OpenAI API...</p>
-                <p><span className="text-green-400">➜</span> Setting up vector database...</p>
-                <p><span className="text-green-400">➜</span> Deploying to Vercel...</p>
-                <p className="text-white"><span className="text-green-400">✔</span> Project shipped in 7 days.</p>
-              </div>
-              <div className="mt-4 pt-4 border-t border-white/10 flex justify-between text-xs text-gray-500">
+              
+              <div className="relative z-10 mt-4 pt-4 border-t border-white/10 flex justify-between text-xs text-gray-500">
                 <span>Status: READY_TO_BUILD</span>
                 <span>Latency: 12ms</span>
               </div>
