@@ -13,85 +13,87 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "coffee-ai-agent",
-    title: "Coffee Shop AI Agent",
-    shortDescription: "A smart AI barista that takes orders and recommends drinks.",
-    fullDescription: "I wanted to see if I could build an AI that feels like a real barista. This agent doesn't just take orders; it understands context. I used LLaMA 3.1 and a multi-agent architecture to handle everything from safety checks to personalized recommendations. It's deployed on RunPod GPUs, so it responds instantly.",
-    techStack: ["Python", "LLaMA 3.1", "Pinecone", "React Native", "Firebase", "RunPod"],
-    impact: "Reduced order latency by 3x and enabled real-time voice-like interaction.",
-    githubUrl: "https://github.com/yashshah/coffee-agent",
+    id: "ai-med-chatbot",
+    title: "AI_Med_Chatbot",
+    shortDescription: "Conversational medical assistant for context-aware Q&A over PDFs.",
+    fullDescription: "A conversational medical assistant built using LangChain, Mistral-7B, FAISS vector search, and Streamlit. It enables context-aware Q&A over medical PDFs using Retrieval-Augmented Generation (RAG). Deployed using HuggingFace Inference Endpoints and custom prompt templates.",
+    techStack: ["LangChain", "Mistral-7B", "FAISS", "Streamlit", "HuggingFace"],
+    impact: "Enables instant, context-aware answers from complex medical documents.",
+    githubUrl: "https://github.com/Yashshah0502",
     architecture: [
-      "User Input -> Guard Agent (Safety Check)",
-      "Classifier Agent -> Determines Intent",
-      "Recommender Agent -> RAG (Pinecone + OpenAI)",
-      "Order Handler -> Firebase Transaction",
-      "LLM -> LLaMA 3.1 (RunPod GPU)"
+      "PDF Ingestion -> Text Chunking",
+      "Embedding -> FAISS Vector Store",
+      "Retrieval -> Context Matching",
+      "Generation -> Mistral-7B (HuggingFace)",
+      "UI -> Streamlit"
     ],
     highlights: [
-      "It feels real: I used RAG to give it knowledge about specific coffee blends.",
-      "It's fast: Deployed on RunPod GPUs to minimize the awkward pause in conversation.",
-      "It's safe: A dedicated Guard Agent ensures it stays on topic and safe."
+      "Implemented RAG for accurate, source-backed medical answers.",
+      "Used FAISS for efficient similarity search over large documents.",
+      "Deployed on HuggingFace Inference Endpoints for scalable inference."
     ]
   },
   {
-    id: "book-recommendation",
-    title: "Semantic Book Search",
-    shortDescription: "Find books by describing the 'vibe' or plot, not just keywords.",
-    fullDescription: "Standard keyword search fails when you don't know the title. I built this engine to let users search by meaning. Using zero-shot classification and LLM embeddings, it understands queries like 'a sad story about a robot' and finds the perfect match. It analyzes emotion and genre to give truly relevant suggestions.",
-    techStack: ["Python", "LangChain", "Chroma", "Gradio", "Transformers"],
-    impact: "Achieved 78% accuracy in genre detection and 66% in sentiment matching.",
-    githubUrl: "https://github.com/yashshah/book-recs",
+    id: "sangeet-by-gitika",
+    title: "SanGeet by Gitika",
+    shortDescription: "Luxury e-commerce platform with a robust admin dashboard.",
+    fullDescription: "SanGeet by Gitika reimagines a luxury e-commerce experience for premium handbags and accessories while offering a robust internal admin control system. The storefront offers an immersive, SEO-optimized shopping experience with real-time product data and conversational commerce via WhatsApp and Instagram. The Admin Workspace is a secure, JWT-based dashboard with analytics, catalog CRUD, and content management built on Supabase and Node.js APIs.",
+    techStack: ["Next.js 16", "TypeScript", "Supabase", "Tailwind CSS v4", "Framer Motion", "Node.js"],
+    impact: "Streamlined inventory management and enhanced customer engagement via social commerce.",
+    liveUrl: "https://sangeetbygitika-ow3q.vercel.app",
+    githubUrl: "https://github.com/Yashshah0502/sangeetbygitika",
     architecture: [
-      "Data Ingestion -> Text Preprocessing",
-      "Embedding Generation -> Pretrained LLM Models",
-      "Vector Store -> ChromaDB",
-      "Inference -> Cosine Similarity Search",
-      "UI -> Gradio Interface"
+      "Frontend -> Next.js 16 (App Router)",
+      "Database -> Supabase (PostgreSQL)",
+      "Auth -> JWT + bcrypt (Role-based)",
+      "State -> React Context + localStorage",
+      "Styling -> Tailwind CSS v4"
     ],
     highlights: [
-      "Encoded over 5,200 books into a vector space for semantic retrieval.",
-      "Implemented zero-shot classification to auto-tag books by genre.",
-      "Added sentiment analysis to match books to the user's current mood."
+      "Built a secure Admin Dashboard with analytics and inventory management.",
+      "Implemented conversational commerce features for WhatsApp and Instagram.",
+      "Optimized SEO with structured data and Open Graph tags."
     ]
   },
   {
-    id: "youtube-analysis",
-    title: "YouTube Viral Trends Pipeline",
-    shortDescription: "A scalable data pipeline to analyze what makes videos go viral.",
-    fullDescription: "I was curious about YouTube trends, so I built a pipeline to analyze them at scale. It ingests data from over 100,000 videos, processes it using serverless AWS functions, and visualizes the results. It's a full ETL pipeline demonstrating how to handle big data efficiently in the cloud.",
-    techStack: ["AWS S3", "AWS Lambda", "AWS Glue", "AWS Athena", "QuickSight", "Python"],
-    impact: "Processed 100k+ video records and visualized key engagement metrics.",
-    githubUrl: "https://github.com/yashshah/youtube-analysis",
+    id: "langgraph-ai-agent",
+    title: "LangGraph-AI-Agent",
+    shortDescription: "Autonomous AI agent with reasoning loop and web search.",
+    fullDescription: "An autonomous AI agent with a FastAPI backend and LangGraph-based reasoning loop. It integrates LLaMA-3.3 70B and Tavily web search for real-time information retrieval and supports web-based interaction via Streamlit.",
+    techStack: ["FastAPI", "LangGraph", "LLaMA-3.3 70B", "Tavily API", "Streamlit"],
+    impact: "Provides real-time, reasoned answers by combining LLM knowledge with live web data.",
+    githubUrl: "https://github.com/Yashshah0502",
     architecture: [
-      "Ingestion -> AWS S3 (Raw JSON)",
-      "Transformation -> AWS Lambda & Glue (ETL)",
-      "Storage -> S3 (Parquet)",
-      "Query Engine -> AWS Athena",
-      "Visualization -> Amazon QuickSight"
+      "User Query -> FastAPI Endpoint",
+      "Reasoning -> LangGraph Loop",
+      "Tool Use -> Tavily Web Search",
+      "Generation -> LLaMA-3.3 70B",
+      "UI -> Streamlit"
     ],
     highlights: [
-      "Built a completely serverless architecture to keep costs low and scalability high.",
-      "Optimized performance by converting raw JSON to Parquet format.",
-      "Created interactive dashboards to spot trends in views and likes."
+      "Designed a reasoning loop using LangGraph for complex query resolution.",
+      "Integrated Tavily for accurate, real-time web search capabilities.",
+      "Built a modular FastAPI backend for easy extensibility."
     ]
   },
   {
-    id: "secure-auth",
-    title: "SecureAuth System",
-    shortDescription: "A production-ready authentication system built from scratch.",
-    fullDescription: "Security is hard to get right, so I built this system to master the fundamentals. It's a full-stack auth solution with JWTs, secure password hashing, and session management. I focused on best practices like token rotation and secure storage to ensure it's ready for real-world use.",
-    techStack: ["React", "Node.js", "Express", "MongoDB", "Redux Toolkit", "JWT"],
-    impact: "Provides a secure, reusable auth foundation for future applications.",
+    id: "book-recommender",
+    title: "BookRecommender",
+    shortDescription: "Hybrid recommender system using sentiment and semantic similarity.",
+    fullDescription: "A hybrid recommender system using sentiment analysis and semantic similarity. It uses zero-shot classification to split fiction/non-fiction with 78% accuracy and vector-based recommendation using cosine similarity across 5,200+ book descriptions.",
+    techStack: ["Python", "Transformers", "Cosine Similarity", "Zero-Shot Classification"],
+    impact: "Achieved 78% accuracy in genre classification and highly relevant recommendations.",
+    githubUrl: "https://github.com/Yashshah0502",
     architecture: [
-      "Client -> React + Redux Toolkit",
-      "API -> Express.js REST Endpoints",
-      "Auth -> JWT (Access/Refresh Tokens)",
-      "Database -> MongoDB (bcryptjs hashing)"
+      "Data Processing -> Text Cleaning",
+      "Classification -> Zero-Shot Model",
+      "Embedding -> Sentence Transformers",
+      "Recommendation -> Cosine Similarity"
     ],
     highlights: [
-      "Implemented industry-standard security with bcryptjs and JWT.",
-      "Managed complex global state using Redux Toolkit.",
-      "Designed a scalable REST API that's easy to integrate."
+      "Implemented zero-shot classification for automatic genre tagging.",
+      "Used semantic similarity to find books with matching 'vibes'.",
+      "Processed a dataset of over 5,200 books for robust recommendations."
     ]
   }
 ];

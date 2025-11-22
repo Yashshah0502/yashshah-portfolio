@@ -22,11 +22,11 @@ export default function Contact() {
 
           <div className="flex justify-center gap-6 mb-12">
             <a
-              href="mailto:hello@yashshah.dev"
+              href="mailto:yshah43@asu.edu"
               className="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors"
             >
               <Mail size={20} />
-              <span>hello@yashshah.dev</span>
+              <span>yshah43@asu.edu</span>
             </a>
             <a
               href="https://www.linkedin.com/in/yash0502/"
@@ -38,7 +38,7 @@ export default function Contact() {
               <span>LinkedIn</span>
             </a>
             <a
-              href="https://github.com/yashshah"
+              href="https://github.com/Yashshah0502"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors"

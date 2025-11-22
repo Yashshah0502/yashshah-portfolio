@@ -88,8 +88,7 @@ export default function Hero() {
 
           {/* Profile Image Placeholder */}
           <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-blue-500/30 shadow-[0_0_50px_rgba(37,99,235,0.3)] bg-zinc-800 flex items-center justify-center">
-             <span className="text-6xl font-bold text-gray-600">YS</span>
-             {/* Replace with actual image: <Image src="/profile.jpg" alt="Yash Shah" fill className="object-cover" /> */}
+             <img src="/profile.jpg" alt="Yash Shah" className="object-cover w-full h-full" />
           </div>
 
           {/* Floating Icons */}

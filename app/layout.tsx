@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 
 import { ViewModeProvider } from "@/context/ViewModeContext";
 import StatsPanel from "@/components/ui/StatsPanel";
+import CommandPalette from "@/components/ui/CommandPalette";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrainsMono = JetBrains_Mono({
@@ -30,6 +31,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <StatsPanel />
+          <CommandPalette />
           <Footer />
         </ViewModeProvider>
       </body>

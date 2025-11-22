@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Check, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -16,6 +16,11 @@ export default function MatchingPuzzle() {
   const [selectedModel, setSelectedModel] = useState<number | null>(null);
   const [matchedPairs, setMatchedPairs] = useState<number[]>([]);
   const [wrongPair, setWrongPair] = useState<number[]>([]);
+  const [shuffledPairs, setShuffledPairs] = useState(pairs);
+
+  useEffect(() => {
+    setShuffledPairs([...pairs].sort(() => 0.5 - Math.random()));
+  }, []);
 
   const handleModelClick = (id: number) => {
     if (matchedPairs.includes(id)) return;
@@ -71,7 +76,7 @@ export default function MatchingPuzzle() {
         </div>
 
         <div className="space-y-3 flex-1">
-          {pairs.sort(() => 0.5 - Math.random()).map((pair) => (
+          {shuffledPairs.map((pair) => (
             <button
               key={`usecase-${pair.id}`}
               onClick={() => handleUseCaseClick(pair.id)}

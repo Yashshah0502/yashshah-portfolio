@@ -12,11 +12,15 @@ interface ProjectCardProps {
 export default function ProjectCard({ project, onClick }: ProjectCardProps) {
   return (
     <motion.div
-      whileHover={{ y: -5 }}
-      className="group relative bg-zinc-900 border border-white/10 rounded-xl overflow-hidden hover:border-blue-500/50 transition-colors cursor-pointer flex flex-col h-full"
+      layoutId={`project-${project.id}`}
       onClick={onClick}
+      whileHover={{ y: -5, scale: 1.02 }}
+      className="group relative bg-black/40 border border-white/10 rounded-xl overflow-hidden cursor-pointer hover:border-blue-500/50 transition-colors duration-300"
     >
-      <div className="p-6 flex flex-col h-full">
+      {/* Glow Effect - Optimized */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/10 group-hover:to-blue-500/10 transition-colors duration-500" />
+      
+      <div className="p-6 relative z-10">
         <div className="flex justify-between items-start mb-4">
           <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
             {project.title}

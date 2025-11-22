@@ -1,58 +1,51 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function IntroOverlay({ onComplete }: { onComplete: () => void }) {
+export default function IntroOverlay() {
+  const [show, setShow] = useState(true);
   const [text, setText] = useState("");
-  const fullText = [
-    "> Booting Yash's AI Engineer Workspace...",
-    "> Loading Projects...",
-    "> Initializing Agents...",
-    "> Access Granted."
-  ];
-  const [lineIndex, setLineIndex] = useState(0);
+  const fullText = "> INITIALIZING SYSTEM...\n> LOADING MODULES...\n> ACCESS GRANTED.";
 
   useEffect(() => {
-    if (lineIndex >= fullText.length) {
-      setTimeout(onComplete, 800);
-      return;
-    }
+    // Lock scroll
+    document.body.style.overflow = "hidden";
 
-    let currentText = "";
-    let charIndex = 0;
-    const line = fullText[lineIndex];
-
+    let i = 0;
     const interval = setInterval(() => {
-      currentText += line[charIndex];
-      setText((prev) => {
-        const lines = prev.split("\n");
-        lines[lines.length - 1] = currentText;
-        return lines.join("\n");
-      });
-      charIndex++;
-
-      if (charIndex >= line.length) {
+      setText(fullText.slice(0, i));
+      i++;
+      if (i > fullText.length) {
         clearInterval(interval);
         setTimeout(() => {
-          setText((prev) => prev + "\n");
-          setLineIndex((prev) => prev + 1);
-        }, 300);
+          setShow(false);
+          // Unlock scroll
+          document.body.style.overflow = "unset";
+        }, 800);
       }
-    }, 30);
+    }, 30); // Faster typing speed
 
-    return () => clearInterval(interval);
-  }, [lineIndex, onComplete]);
+    return () => {
+      clearInterval(interval);
+      document.body.style.overflow = "unset";
+    };
+  }, []);
 
   return (
-    <motion.div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black text-green-500 font-mono text-lg md:text-xl"
-      initial={{ opacity: 1 }}
-      exit={{ y: "-100%", transition: { duration: 0.8, ease: "easeInOut" } }}
-    >
-      <div className="w-full max-w-2xl px-6">
-        <pre className="whitespace-pre-wrap">{text}<span className="animate-pulse">_</span></pre>
-      </div>
-    </motion.div>
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          className="fixed inset-0 z-50 bg-black flex items-center justify-center font-mono text-green-500"
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <pre className="text-sm md:text-base whitespace-pre-wrap">
+            {text}
+            <span className="animate-pulse">_</span>
+          </pre>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
