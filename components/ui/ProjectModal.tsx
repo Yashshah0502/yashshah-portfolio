@@ -35,10 +35,11 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative w-full max-w-5xl bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
+          onClick={(e) => e.stopPropagation()}
+          className="relative w-full max-w-5xl bg-zinc-950 border border-white/10 rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
         >
           {/* Hero Header */}
-          <div className="relative p-8 border-b border-white/10 overflow-hidden">
+          <div className="relative p-4 md:p-8 border-b border-white/10 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20" />
             <div className="absolute top-0 right-0 p-4 z-20">
               <button 
@@ -59,7 +60,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 </span>
               </div>
               
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
                 {project.title}
               </h2>
               
@@ -101,7 +102,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             </div>
 
             {/* Tabs */}
-            <div className="flex border-b border-white/10 px-8 relative z-20 bg-zinc-900">
+            <div className="flex border-b border-white/10 px-4 md:px-8 relative z-20 bg-zinc-900">
               <button
                 onClick={() => setActiveTab("overview")}
                 className={cn(
@@ -132,7 +133,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             </div>
 
             {/* Content */}
-            <div className="p-8 overflow-y-auto custom-scrollbar flex-1">
+            <div className="p-4 md:p-8">
               {activeTab === "overview" && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
                   <div>

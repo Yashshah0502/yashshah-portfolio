@@ -13,20 +13,28 @@ export default function Contact() {
     
     // Basic validation
     const form = e.target as HTMLFormElement;
-    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const formData = new FormData(form);
+    const email = formData.get("email") as string;
+    const name = formData.get("name") as string;
+    const interest = formData.get("interest") as string;
+    const message = formData.get("message") as string;
     
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
       alert("Please enter a valid email address.");
       return;
     }
 
-    setFormState("loading");
+    // Create mailto link with form data
+    const subject = encodeURIComponent(`Portfolio Contact: ${interest}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    const mailtoLink = `mailto:yshah43@asu.edu?subject=${subject}&body=${body}`;
     
-    // Simulate network request
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    // Open email client
+    window.location.href = mailtoLink;
     
+    // Show success message
     setFormState("success");
-    console.log("Email sent successfully!");
+    form.reset();
   };
   return (
     <section id="contact" className="py-20 bg-black text-white border-t border-white/10">
@@ -93,6 +101,7 @@ export default function Contact() {
                 <input
                   type="text"
                   id="name"
+                  name="name"
                   required
                   className="w-full px-4 py-3 bg-black border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 text-white transition-colors"
                   placeholder="John Doe"
@@ -105,6 +114,7 @@ export default function Contact() {
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   required
                   className="w-full px-4 py-3 bg-black border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 text-white transition-colors"
                   placeholder="john@example.com"
@@ -116,6 +126,7 @@ export default function Contact() {
                 </label>
                 <select
                   id="interest"
+                  name="interest"
                   className="w-full px-4 py-3 bg-black border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 text-white transition-colors appearance-none"
                 >
                   <option>Recruiting for a role</option>
@@ -129,6 +140,7 @@ export default function Contact() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={4}
                   required
                   className="w-full px-4 py-3 bg-black border border-white/10 rounded-lg focus:outline-none focus:border-blue-500 text-white transition-colors resize-none"
@@ -155,15 +167,9 @@ export default function Contact() {
                 <Send size={32} className="text-green-400" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-              <p className="text-gray-300 mb-4">
-                (This is a demo form. To actually reach me, please click below)
+              <p className="text-gray-300">
+                Thanks for reaching out! I'll get back to you shortly.
               </p>
-              <a 
-                href="mailto:yshah43@asu.edu"
-                className="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors"
-              >
-                Send Real Email
-              </a>
             </motion.div>
           )}
         </motion.div>
