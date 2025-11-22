@@ -19,7 +19,11 @@ const Contact = dynamic(() => import("@/components/sections/Contact"), { ssr: tr
 
 export default function Home() {
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Force scroll to top on load
+    if (typeof window !== "undefined") {
+      window.history.scrollRestoration = "manual";
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   return (

@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { ViewModeProvider } from "@/context/ViewModeContext";
 import StatsPanel from "@/components/ui/StatsPanel";
 import CommandPalette from "@/components/ui/CommandPalette";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrainsMono = JetBrains_Mono({
@@ -57,7 +58,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-black text-white antialiased`}>
         <ViewModeProvider>
           <Navbar />
@@ -65,6 +66,7 @@ export default function RootLayout({
           <StatsPanel />
           <CommandPalette />
           <Footer />
+          <Analytics />
         </ViewModeProvider>
       </body>
     </html>

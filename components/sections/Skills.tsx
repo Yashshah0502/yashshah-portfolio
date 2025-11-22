@@ -25,9 +25,9 @@ export default function Skills() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-12">
+        <div className="flex flex-col lg:grid lg:grid-cols-3 gap-12">
           {/* Skills Grid */}
-          <div className="lg:col-span-2 grid md:grid-cols-2 gap-6">
+          <div className="lg:col-span-2 grid sm:grid-cols-2 gap-6">
             {skills.map((category, index) => {
               return (
                 <motion.div

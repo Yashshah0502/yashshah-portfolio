@@ -3,7 +3,7 @@
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
-import { ArrowRight, Download, Database, Server, Brain, Code } from "lucide-react";
+import { ArrowRight, Download, Database, Server, Brain, Code, FileText } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -64,10 +64,13 @@ export default function Hero() {
               View Projects <ArrowRight size={18} />
             </Link>
             <a
-              href="/resume.pdf"
-              className="px-8 py-3 border border-white/20 hover:bg-white/10 text-white rounded-full font-medium transition-all flex items-center gap-2"
+              href="/Resume_Yash_Shah.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 rounded-full border border-white/10 hover:bg-white/5 transition-all text-white font-medium flex items-center gap-2 group"
             >
-              Download Resume <Download size={18} />
+              <FileText size={20} className="group-hover:scale-110 transition-transform" />
+              Resume
             </a>
           </div>
           
@@ -96,25 +99,25 @@ export default function Hero() {
              <img src="/profile.jpg" alt="Yash Shah" className="object-cover w-full h-full" />
           </div>
 
-          {/* Floating Icons */}
+          {/* Floating Icons - Hidden on mobile for better layout */}
           <motion.div 
             animate={{ y: [0, -20, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-0 right-10 p-3 bg-zinc-900 rounded-xl border border-white/10 shadow-xl"
+            className="hidden md:block absolute top-0 right-10 p-3 bg-zinc-900 rounded-xl border border-white/10 shadow-xl"
           >
             <Brain className="text-purple-400" size={32} />
           </motion.div>
           <motion.div 
             animate={{ y: [0, 20, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute bottom-10 left-0 p-3 bg-zinc-900 rounded-xl border border-white/10 shadow-xl"
+            className="hidden md:block absolute bottom-10 left-0 p-3 bg-zinc-900 rounded-xl border border-white/10 shadow-xl"
           >
             <Database className="text-blue-400" size={32} />
           </motion.div>
           <motion.div 
             animate={{ x: [0, 20, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-            className="absolute top-1/2 -right-10 p-3 bg-zinc-900 rounded-xl border border-white/10 shadow-xl"
+            className="hidden md:block absolute top-1/2 -right-10 p-3 bg-zinc-900 rounded-xl border border-white/10 shadow-xl"
           >
             <Code className="text-green-400" size={32} />
           </motion.div>
