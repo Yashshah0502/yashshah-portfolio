@@ -15,18 +15,9 @@ export default function About() {
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
             <div className="space-y-4 text-gray-300 leading-relaxed">
-              <p>
-                I&apos;m an AI Engineer and Full-Stack Developer with a Master&apos;s in Information Technology from Arizona State University (4.0 GPA). 
-                I specialize in building autonomous agents, RAG pipelines, and scalable full-stack applications.
-              </p>
-              <p>
-                Currently, I&apos;m an IT Business Analyst Intern at Zydus Pharmaceuticals, where I build multi-agent systems in Microsoft Teams 
-                to automate complex data reporting. Previously, I&apos;ve engineered data solutions for ASU and the NYC Department of Finance.
-              </p>
-              <p>
-                I thrive on solving hard problems—whether it&apos;s optimizing ETL pipelines for millions of records or fine-tuning LLMs for 
-                semantic search. My goal is to build systems that don&apos;t just work, but think.
-              </p>
+              <p>I'm an AI Engineer and Full-Stack Developer with a Master’s in Information Technology from Arizona State University (4.0 GPA). I build systems that reason, automate, and scale—from multi-agent architectures to full-stack applications that ship in production.</p>
+              <p>Right now, I’m an IT Business Analyst Intern at Zydus Pharmaceuticals, where I’m building an autonomous multi-agent system inside Microsoft Teams to generate complex data reports and validate insights automatically. Before that, I engineered large-scale data pipelines at ASU and built workflow automation solutions for the NYC Department of Finance.</p>
+              <p>I love solving technical problems, whether it's optimizing ETL pipelines that process millions of rows, designing RAG systems for semantic search, or integrating LLMs into real business operations. My focus is simple: build software that doesn’t just function, but thinks and delivers measurable impact.</p>
             </div>
           </motion.div>
           
