@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
@@ -18,14 +17,6 @@ const BuildWithMe = dynamic(() => import("@/components/sections/BuildWithMe"), {
 const Contact = dynamic(() => import("@/components/sections/Contact"), { ssr: true });
 
 export default function Home() {
-  useEffect(() => {
-    // Force scroll to top on load
-    if (typeof window !== "undefined") {
-      window.history.scrollRestoration = "manual";
-      window.scrollTo(0, 0);
-    }
-  }, []);
-
   return (
     <main className="flex min-h-screen flex-col bg-black text-white">
       <IntroOverlay />

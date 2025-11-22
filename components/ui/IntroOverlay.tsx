@@ -9,8 +9,15 @@ export default function IntroOverlay() {
   const fullText = "> INITIALIZING SYSTEM...\n> LOADING MODULES...\n> ACCESS GRANTED.";
 
   useEffect(() => {
-    // Lock scroll and force to top
+    // Immediate scroll reset
     window.scrollTo(0, 0);
+    
+    // Also reset after a tiny delay to catch browser scroll restoration
+    setTimeout(() => window.scrollTo(0, 0), 0);
+    setTimeout(() => window.scrollTo(0, 0), 10);
+    setTimeout(() => window.scrollTo(0, 0), 50);
+    
+    // Lock scroll during intro
     document.body.style.overflow = "hidden";
 
     let i = 0;
@@ -21,12 +28,11 @@ export default function IntroOverlay() {
         clearInterval(interval);
         setTimeout(() => {
           setShow(false);
-          // Unlock scroll and ensure we're at top
+          // Unlock scroll smoothly
           document.body.style.overflow = "unset";
-          window.scrollTo(0, 0);
         }, 800);
       }
-    }, 30); // Faster typing speed
+    }, 30);
 
     return () => {
       clearInterval(interval);

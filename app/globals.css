@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  /* Disable smooth scroll on initial load */
+  html {
+    scroll-behavior: auto !important;
+  }
+  
   button, a {
     cursor: pointer;
   }
