@@ -26,15 +26,18 @@ export default function AgentWidget() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  // Removed auto-scroll - users can scroll manually to read messages
+  // const scrollToBottom = () => {
+  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  // };
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages, isTyping]);
-
-  const handleAsk = (qa: typeof predefinedQA[0]) => {
+  const handleAsk = (qa: typeof predefinedQA[0], event?: React.MouseEvent) => {
+    // Prevent any default behavior or event bubbling
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    
     setMessages((prev) => [...prev, { role: "user", text: qa.question }]);
     setIsTyping(true);
 
@@ -47,17 +50,22 @@ export default function AgentWidget() {
   return (
     <div className="bg-zinc-900 border border-white/10 rounded-xl overflow-hidden flex flex-col h-[500px]">
       {/* Header */}
-      <div className="p-4 border-b border-white/10 bg-zinc-950 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
-          <Bot size={18} className="text-white" />
+      <div className="p-4 border-b border-white/10 bg-zinc-950">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+            <Bot size={18} className="text-white" />
+          </div>
+          <div>
+            <h3 className="font-bold text-white text-sm">Portfolio Agent</h3>
+            <p className="text-xs text-green-400 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              Online
+            </p>
+          </div>
         </div>
-        <div>
-          <h3 className="font-bold text-white text-sm">Portfolio Agent</h3>
-          <p className="text-xs text-green-400 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-            Online
-          </p>
-        </div>
+        <p className="text-xs text-gray-400 mt-2 opacity-70">
+          Demo version. Fully AI-powered conversational agent coming soon.
+        </p>
       </div>
 
       {/* Chat Area */}
@@ -110,7 +118,8 @@ export default function AgentWidget() {
           {predefinedQA.map((qa, i) => (
             <button
               key={i}
-              onClick={() => handleAsk(qa)}
+              type="button"
+              onClick={(e) => handleAsk(qa, e)}
               disabled={isTyping}
               className="text-xs px-3 py-2 bg-zinc-800 hover:bg-zinc-700 border border-white/5 rounded-full text-blue-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-left"
             >

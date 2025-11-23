@@ -10,31 +10,35 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setFormState("loading");
     
-    // Basic validation
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
-    const email = formData.get("email") as string;
-    const name = formData.get("name") as string;
-    const interest = formData.get("interest") as string;
-    const message = formData.get("message") as string;
     
-    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
-      alert("Please enter a valid email address.");
-      return;
-    }
+    // Add Web3Forms Access Key
+    formData.append("access_key", "418c8947-cfca-4348-aba1-b157b65270ce");
 
-    // Create mailto link with form data
-    const subject = encodeURIComponent(`Portfolio Contact: ${interest}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-    const mailtoLink = `mailto:yshah43@asu.edu?subject=${subject}&body=${body}`;
-    
-    // Open email client
-    window.location.href = mailtoLink;
-    
-    // Show success message
-    setFormState("success");
-    form.reset();
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setFormState("success");
+        form.reset();
+      } else {
+        console.error("Form submission failed:", data);
+        alert("Something went wrong. Please try again later.");
+        setFormState("idle");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Something went wrong. Please check your internet connection.");
+      setFormState("idle");
+    }
   };
   return (
     <section id="contact" className="py-20 bg-black text-white border-t border-white/10">
@@ -152,24 +156,43 @@ export default function Contact() {
                 disabled={formState === "loading"}
                 className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.5)] disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {formState === "loading" ? "Sending..." : "Send Message"} <Send size={18} />
+                {formState === "loading" ? (
+                  <>
+                    <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Send Message</span>
+                    <Send size={18} />
+                  </>
+                )}
               </button>
             </form>
           </motion.div>
 
           {formState === "success" && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="bg-green-500/10 border border-green-500/20 p-8 rounded-2xl text-center"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ type: "spring", duration: 0.5 }}
+              className="bg-green-500/10 border border-green-500/20 p-8 rounded-2xl text-center relative overflow-hidden"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500/20 rounded-full mb-4">
-                <Send size={32} className="text-green-400" />
+              <div className="absolute inset-0 bg-green-500/5 animate-pulse" />
+              <div className="relative z-10">
+                <motion.div 
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: "spring", duration: 0.6, delay: 0.1 }}
+                  className="inline-flex items-center justify-center w-20 h-20 bg-green-500/20 rounded-full mb-6 ring-1 ring-green-500/40"
+                >
+                  <Send size={36} className="text-green-400" />
+                </motion.div>
+                <h3 className="text-3xl font-bold text-white mb-3">Message Sent!</h3>
+                <p className="text-gray-300 text-lg max-w-md mx-auto">
+                  Thanks for reaching out! I've received your message and will get back to you shortly.
+                </p>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-              <p className="text-gray-300">
-                Thanks for reaching out! I'll get back to you shortly.
-              </p>
             </motion.div>
           )}
         </motion.div>
